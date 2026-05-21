@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jonath — Full Stack Developer & ML Researcher</title>
+    <meta name="description" content="Portfolio of Alex Carter — Frontend, Backend, Full Stack Developer & Machine Learning Researcher." />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#7c3aed',
+                        accent: '#22d3ee',
+                        dark: '#0a0a0f',
+                        darker: '#06060a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Three.js + Vanta.js for 3D background -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-darker text-gray-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- Custom cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Loading screen -->
+    <div id="loader" class="fixed inset-0 z-[100] bg-darker flex items-center justify-center">
+        <div class="text-center">
+            <div class="loader-logo text-5xl font-bold mb-6">
+                <span class="text-primary">&lt;</span>Start<span class="text-accent">/&gt;</span>
+            </div>
+            <div class="w-48 h-1 bg-gray-800 rounded overflow-hidden mx-auto">
+                <div id="loader-bar" class="h-full bg-gradient-to-r from-primary to-accent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Animated Background -->
+    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+    <div class="fixed inset-0 z-0 bg-gradient-to-b from-darker/40 via-darker/20 to-darker/80 pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home" class="text-2xl font-bold tracking-tight">
+                <span class="text-primary">&lt;</span>Jonath<span class="text-accent">/&gt;</span>
+            </a>
+            <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold hover:scale-105 transition-transform">
+                <i class="fas fa-paper-plane text-xs"></i> Hire Me
+            </a>
+            <button id="menu-toggle" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darker/95 backdrop-blur border-t border-gray-800">
+            <ul class="flex flex-col gap-4 p-6">
+                <li><a href="#home" class="mobile-nav">Home</a></li>
+                <li><a href="#about" class="mobile-nav">About</a></li>
+                <li><a href="#skills" class="mobile-nav">Skills</a></li>
+                <li><a href="#projects" class="mobile-nav">Projects</a></li>
+                <li><a href="#research" class="mobile-nav">Research</a></li>
+                <li><a href="#contact" class="mobile-nav">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-6 z-10">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-sm" data-aos="fade-down">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    Available for new opportunities
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight" data-aos="fade-up">
+                    Hi, I'm <span class="bg-gradient-to-r from-primary via-pink-500 to-accent bg-clip-text text-transparent">Quintus Jonath</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-300 h-12" data-aos="fade-up" data-aos-delay="100">
+                    <span id="typed-text"></span><span class="text-accent">|</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-xl leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                    I build elegant web experiences end-to-end and conduct research at the intersection of <span class="text-accent">deep learning</span>, <span class="text-primary">computer vision</span>, and human-centered AI.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#projects" class="group px-6 py-3 rounded-full bg-gradient-to-r from-primary to-accent font-semibold flex items-center gap-2 hover:shadow-2xl hover:shadow-primary/50 transition-all hover:-translate-y-1">
+                        View My Work <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#contact" class="px-6 py-3 rounded-full border border-gray-600 font-semibold flex items-center gap-2 hover:border-accent hover:text-accent transition-all">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+                <div class="flex gap-5 pt-6" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-google-scholar"></i></a>
+                    <a href="#" class="social-icon"><i class="fas fa-file-pdf"></i></a>
+                </div>
+            </div>
+
+            <!-- 3D Floating Card -->
+            <div class="relative flex justify-center items-center" data-aos="zoom-in" data-aos-delay="200">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <div id="tilt-card" class="relative w-80 h-80 md:w-96 md:h-96 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-xl border border-gray-700/50 p-8 shadow-2xl">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center text-3xl floating">
+                        <i class="fas fa-code text-primary"></i>
+                    </div>
+                    <div class="absolute -top-6 -right-2 w-20 h-20 rounded-2xl bg-accent/20 border border-accent/40 flex items-center justify-center text-2xl floating" style="animation-delay: -1s">
+                        <i class="fas fa-brain text-accent"></i>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 rounded-2xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-3xl floating" style="animation-delay: -2s">
+                        <i class="fas fa-database text-pink-400"></i>
+                    </div>
+                    <div class="absolute -bottom-2 -left-6 w-20 h-20 rounded-2xl bg-green-500/20 border border-green-500/40 flex items-center justify-center text-2xl floating" style="animation-delay: -1.5s">
+                        <i class="fas fa-rocket text-green-400"></i>
+                    </div>
+
+                    <div class="h-full flex flex-col justify-center items-center text-center space-y-4">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-4xl font-bold">
+                            AC
+                        </div>
+                        <div>
+                            <div class="text-xl font-bold">Quintus Jonath</div>
+                            <div class="text-sm text-gray-400">Full Stack Dev · ML Researcher</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 w-full pt-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary" data-counter="6">0</div>
+                                <div class="text-xs text-gray-500">Years</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-accent" data-counter="42">0</div>
+                                <div class="text-xs text-gray-500">Projects</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-pink-400" data-counter="12">0</div>
+                                <div class="text-xs text-gray-500">Papers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500">
+            <div class="flex flex-col items-center gap-2 text-xs">
+                <span>Scroll</span>
+                <div class="w-5 h-8 border-2 border-gray-500 rounded-full flex justify-center p-1">
+                    <div class="w-1 h-2 bg-gray-400 rounded-full scroll-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="relative py-24 px-6 z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-accent font-mono text-sm mb-2">// 01. Who I Am</p>
+                <h2 class="text-4xl md:text-5xl font-bold">About <span class="text-primary">Me</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-5 text-gray-300 leading-relaxed" data-aos="fade-right">
+                    <p>
+                        I'm a software engineer and ML researcher with <span class="text-accent font-semibold">6+ years</span> of experience building production-grade web apps and conducting research in deep learning.
+                    </p>
+                    <p>
+                        I move fluidly across the stack — from pixel-perfect interfaces with <span class="text-primary">React</span> and <span class="text-primary">TypeScript</span>, to scalable backends with <span class="text-primary">Node.js</span>, <span class="text-primary">Go</span>, and <span class="text-primary">Python</span>, to research in <span class="text-accent">PyTorch</span> on vision and multimodal models.
+                    </p>
+                    <p>
+                        I've shipped products used by hundreds of thousands and published peer-reviewed work at venues like <span class="text-accent">NeurIPS</span>, <span class="text-accent">CVPR</span>, and <span class="text-accent">ICLR</span>.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-6">
+                        <div class="info-card">
+                            <i class="fas fa-graduation-cap text-primary text-xl mb-2"></i>
+                            <div class="font-semibold">B.Sc. Computer Science</div>
+                            <div class="text-sm text-gray-500">Uwa wellassa University</div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-briefcase text-accent text-xl mb-2"></i>
+                            <div class="font-semibold">Senior Engineer</div>
+                            <div class="text-sm text-gray-500">@ TechCorp Labs</div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt text-pink-400 text-xl mb-2"></i>
+                            <div class="font-semibold">Sri Lanka - Mannar</div>
+                            <div class="text-sm text-gray-500">Remote-friendly</div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-language text-green-400 text-xl mb-2"></i>
+                            <div class="font-semibold">EN · TN</div>
+                            <div class="text-sm text-gray-500">Fluent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animated code block -->
+                <div data-aos="fade-left" class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-30"></div>
+                    <div class="relative rounded-2xl bg-gray-900/90 border border-gray-700 overflow-hidden font-mono text-sm shadow-2xl">
+                        <div class="flex items-center gap-2 px-4 py-3 bg-gray-950/80 border-b border-gray-800">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                            <span class="text-xs text-gray-500 ml-2">jonath.ts</span>
+                        </div>
+                        <pre class="p-5 leading-relaxed overflow-x-auto"><code><span class="text-pink-400">const</span> <span class="text-accent">jonath</span> <span class="text-gray-400">=</span> <span class="text-gray-400">{</span>
+  <span class="text-blue-300">name</span><span class="text-gray-400">:</span> <span class="text-green-400">'Quintus Jonath'</span><span class="text-gray-400">,</span>
+  <span class="text-blue-300">roles</span><span class="text-gray-400">: [</span>
+    <span class="text-green-400">'Frontend Dev'</span><span class="text-gray-400">,</span>
+    <span class="text-green-400">'Backend Dev'</span><span class="text-gray-400">,</span>
+    <span class="text-green-400">'ML Researcher'</span>
+  <span class="text-gray-400">],</span>
+  <span class="text-blue-300">stack</span><span class="text-gray-400">: {</span>
+    <span class="text-blue-300">frontend</span><span class="text-gray-400">: [</span><span class="text-green-400">'React'</span><span class="text-gray-400">,</span> <span class="text-green-400">'Next.js'</span><span class="text-gray-400">,</span> <span class="text-green-400">'Vue'</span><span class="text-gray-400">],</span>
+    <span class="text-blue-300">backend</span><span class="text-gray-400">: [</span><span class="text-green-400">'Node'</span><span class="text-gray-400">,</span> <span class="text-green-400">'Go'</span><span class="text-gray-400">,</span> <span class="text-green-400">'FastAPI'</span><span class="text-gray-400">],</span>
+    <span class="text-blue-300">ml</span><span class="text-gray-400">: [</span><span class="text-green-400">'PyTorch'</span><span class="text-gray-400">,</span> <span class="text-green-400">'JAX'</span><span class="text-gray-400">,</span> <span class="text-green-400">'CUDA'</span><span class="text-gray-400">]</span>
+  <span class="text-gray-400">},</span>
+  <span class="text-blue-300">currentlyBuilding</span><span class="text-gray-400">:</span> <span class="text-green-400">'something amazing 🚀'</span>
+<span class="text-gray-400">};</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="relative py-24 px-6 z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-accent font-mono text-sm mb-2">// 02. What I Do</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Skills & <span class="text-primary">Expertise</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Frontend -->
+                <div class="skill-card group" data-aos="fade-up" data-aos-delay="0">
+                    <div class="skill-icon bg-gradient-to-br from-blue-500/20 to-cyan-500/20 text-cyan-400">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">Frontend</h3>
+                    <p class="text-gray-400 text-sm mt-2">Crafting fast, accessible, and beautiful UIs.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vue</span>
+                        <span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">GSAP</span>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="skill-card group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-icon bg-gradient-to-br from-green-500/20 to-emerald-500/20 text-green-400">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">Backend</h3>
+                    <p class="text-gray-400 text-sm mt-2">Scalable APIs, microservices, and data pipelines.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="chip">Node.js</span><span class="chip">Go</span><span class="chip">FastAPI</span>
+                        <span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">gRPC</span>
+                    </div>
+                </div>
+
+                <!-- DevOps -->
+                <div class="skill-card group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-icon bg-gradient-to-br from-orange-500/20 to-red-500/20 text-orange-400">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">DevOps & Cloud</h3>
+                    <p class="text-gray-400 text-sm mt-2">Ship fast, ship safe, scale infinitely.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AWS</span>
+                        <span class="chip">GCP</span><span class="chip">Terraform</span><span class="chip">CI/CD</span>
+                    </div>
+                </div>
+
+                <!-- ML -->
+                <div class="skill-card group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-icon bg-gradient-to-br from-purple-500/20 to-pink-500/20 text-purple-400">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">Machine Learning</h3>
+                    <p class="text-gray-400 text-sm mt-2">Research and deploy SOTA deep learning models.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="chip">PyTorch</span><span class="chip">JAX</span><span class="chip">TensorFlow</span>
+                        <span class="chip">CUDA</span><span class="chip">HuggingFace</span><span class="chip">MLOps</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill bars -->
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 mt-20 max-w-5xl mx-auto" data-aos="fade-up">
+                <div class="skill-bar" data-level="95"><span>JavaScript / TypeScript</span><span>95%</span></div>
+                <div class="skill-bar" data-level="92"><span>React / Next.js</span><span>92%</span></div>
+                <div class="skill-bar" data-level="88"><span>Python / PyTorch</span><span>88%</span></div>
+                <div class="skill-bar" data-level="85"><span>Node.js / Go</span><span>85%</span></div>
+                <div class="skill-bar" data-level="82"><span>System Design</span><span>82%</span></div>
+                <div class="skill-bar" data-level="90"><span>Deep Learning Research</span><span>90%</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="relative py-24 px-6 z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <p class="text-accent font-mono text-sm mb-2">// 03. Featured Work</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Projects & <span class="text-primary">Case Studies</span></h2>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+                <button class="filter-btn" data-filter="ml">ML / AI</button>
+            </div>
+
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <article class="project-card" data-category="fullstack" data-aos="fade-up">
+                    <div class="project-img bg-gradient-to-br from-purple-600 to-blue-600">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-accent/10">Full Stack</span>
+                            <span class="text-gray-500">2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold">FinPulse — Real-Time Trading Dashboard</h3>
+                        <p class="text-gray-400 text-sm mt-2">High-throughput trading dashboard streaming 100k+ events/sec with WebSockets, Redis Streams, and React.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">Next.js</span><span class="tech-tag">Go</span><span class="tech-tag">Redis</span><span class="tech-tag">WebSocket</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card" data-category="ml" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-img bg-gradient-to-br from-pink-600 to-purple-600">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-pink-500/10 text-pink-400">ML / AI</span>
+                            <span class="text-gray-500">2025</span>
+                        </div>
+                        <h3 class="text-xl font-bold">VisionForge — Diffusion Model Playground</h3>
+                        <p class="text-gray-400 text-sm mt-2">Custom-trained latent diffusion model with a ControlNet-style conditioning module, served via FastAPI + Triton.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">PyTorch</span><span class="tech-tag">CUDA</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Triton</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                            <a href="#" class="project-link"><i class="fas fa-file-alt"></i> Paper</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card" data-category="frontend" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-img bg-gradient-to-br from-cyan-500 to-blue-600">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-cyan-500/10">Frontend</span>
+                            <span class="text-gray-500">2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold">Nebula UI — Component Library</h3>
+                        <p class="text-gray-400 text-sm mt-2">Open-source React component library with 80+ components, full a11y compliance, and 4k+ GitHub stars.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">React</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Storybook</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Docs</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card" data-category="backend" data-aos="fade-up">
+                    <div class="project-img bg-gradient-to-br from-green-500 to-emerald-600">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-green-500/10 text-green-400">Backend</span>
+                            <span class="text-gray-500">2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold">SwiftQueue — Distributed Job Engine</h3>
+                        <p class="text-gray-400 text-sm mt-2">Horizontally-scalable job queue built in Go, processing 5M+ jobs/day with sub-100ms latency.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">Go</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Kafka</span><span class="tech-tag">K8s</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-book"></i> Blog</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project-card" data-category="ml" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-img bg-gradient-to-br from-yellow-500 to-orange-600">
+                        <i class="fas fa-microphone-lines"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-pink-500/10 text-pink-400">ML / AI</span>
+                            <span class="text-gray-500">2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold">EchoNet — Multilingual Speech Model</h3>
+                        <p class="text-gray-400 text-sm mt-2">Self-supervised speech representation model trained on 100k hours across 60 languages. Open-sourced weights.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">JAX</span><span class="tech-tag">TPU</span><span class="tech-tag">HuggingFace</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fas fa-file-alt"></i> arXiv</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="project-card" data-category="fullstack" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-img bg-gradient-to-br from-red-500 to-pink-600">
+                        <i class="fas fa-cart-shopping"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-accent mb-2">
+                            <span class="px-2 py-1 rounded-full bg-accent/10">Full Stack</span>
+                            <span class="text-gray-500">2023</span>
+                        </div>
+                        <h3 class="text-xl font-bold">ShopSphere — Headless Commerce</h3>
+                        <p class="text-gray-400 text-sm mt-2">Multi-tenant SaaS commerce platform powering 200+ merchants with $20M+ GMV processed.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">Next.js</span><span class="tech-tag">tRPC</span><span class="tech-tag">Stripe</span><span class="tech-tag">Prisma</span>
+                        </div>
+                        <div class="flex gap-3 mt-5">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                            <a href="#" class="project-link"><i class="fas fa-book"></i> Case Study</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" class="relative py-24 px-6 z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-accent font-mono text-sm mb-2">// 04. Publications</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Research & <span class="text-primary">Publications</span></h2>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-pink-500 -translate-x-1/2"></div>
+
+                <div class="space-y-12">
+                    <!-- Paper 1 -->
+                    <div class="timeline-item md:flex md:items-center" data-aos="fade-right">
+                        <div class="md:w-1/2 md:pr-12 md:text-right">
+                            <div class="paper-card">
+                                <div class="text-accent font-mono text-xs mb-1">NeurIPS 2025 · Oral</div>
+                                <h3 class="text-lg font-bold">Sparse Mixture-of-Depths for Efficient LLM Inference</h3>
+                                <p class="text-gray-400 text-sm mt-2">A new conditional compute mechanism cutting LLM inference cost by 2.4× with no quality drop.</p>
+                                <div class="flex gap-3 mt-3 justify-end md:justify-end text-sm">
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="#" class="text-accent hover:underline"><i class="fab fa-github"></i> Code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-dot bg-primary"></div>
+                    </div>
+                    <!-- Paper 2 -->
+                    <div class="timeline-item md:flex md:items-center md:flex-row-reverse" data-aos="fade-left">
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="paper-card">
+                                <div class="text-accent font-mono text-xs mb-1">CVPR 2025</div>
+                                <h3 class="text-lg font-bold">Geometric Consistency in Video Diffusion Models</h3>
+                                <p class="text-gray-400 text-sm mt-2">Novel 3D-aware loss for temporally and geometrically consistent video generation.</p>
+                                <div class="flex gap-3 mt-3 text-sm">
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-video"></i> Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-dot bg-accent"></div>
+                    </div>
+                    <!-- Paper 3 -->
+                    <div class="timeline-item md:flex md:items-center" data-aos="fade-right">
+                        <div class="md:w-1/2 md:pr-12 md:text-right">
+                            <div class="paper-card">
+                                <div class="text-accent font-mono text-xs mb-1">ICLR 2024 · Spotlight</div>
+                                <h3 class="text-lg font-bold">Self-Supervised Representation Learning on Graphs</h3>
+                                <p class="text-gray-400 text-sm mt-2">Pretraining framework reaching SOTA on 9/12 standard graph benchmarks.</p>
+                                <div class="flex gap-3 mt-3 justify-end md:justify-end text-sm">
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="#" class="text-accent hover:underline"><i class="fab fa-github"></i> Code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-dot bg-pink-500"></div>
+                    </div>
+                    <!-- Paper 4 -->
+                    <div class="timeline-item md:flex md:items-center md:flex-row-reverse" data-aos="fade-left">
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="paper-card">
+                                <div class="text-accent font-mono text-xs mb-1">ACL 2023</div>
+                                <h3 class="text-lg font-bold">Fairness Probes in Multilingual Language Models</h3>
+                                <p class="text-gray-400 text-sm mt-2">Empirical study of demographic bias across 40 languages in modern LLMs.</p>
+                                <div class="flex gap-3 mt-3 text-sm">
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a href="#" class="text-accent hover:underline"><i class="fas fa-database"></i> Data</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-dot bg-green-500"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="text-4xl font-bold text-primary" data-counter="12">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Publications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-4xl font-bold text-accent" data-counter="1240">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Citations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-4xl font-bold text-pink-400" data-counter="18">0</div>
+                    <div class="text-sm text-gray-400 mt-2">h-index</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-4xl font-bold text-green-400" data-counter="7">0</div>
+                    <div class="text-sm text-gray-400 mt-2">Top Venues</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="relative py-24 px-6 z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <p class="text-accent font-mono text-sm mb-2">// 05. Get In Touch</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Let's <span class="text-primary">Build</span> Together</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Whether you have a product idea, a research collaboration, or just want to say hi — my inbox is open.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Info -->
+                <div class="space-y-4" data-aos="fade-right">
+                    <a href="mailto:hello@jonath.dev" class="contact-info">
+                        <div class="contact-icon bg-primary/20 text-primary"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="text-xs text-gray-500">Email</div>
+                            <div class="font-semibold">hello@jonath.dev</div>
+                        </div>
+                    </a>
+                    <a href="#" class="contact-info">
+                        <div class="contact-icon bg-accent/20 text-accent"><i class="fab fa-linkedin"></i></div>
+                        <div>
+                            <div class="text-xs text-gray-500">LinkedIn</div>
+                            <div class="font-semibold">linkedin.com/in/jonath</div>
+                        </div>
+                    </a>
+                    <a href="#" class="contact-info">
+                        <div class="contact-icon bg-pink-500/20 text-pink-400"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="text-xs text-gray-500">GitHub</div>
+                            <div class="font-semibold">github.com/jonath</div>
+                        </div>
+                    </a>
+                    <a href="#" class="contact-info">
+                        <div class="contact-icon bg-green-500/20 text-green-400"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <div class="text-xs text-gray-500">Google Scholar</div>
+                            <div class="font-semibold">scholar.google.com/jonath</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Form -->
+                <form id="contact-form" class="space-y-4 relative" data-aos="fade-left">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-20"></div>
+                    <div class="relative bg-gray-900/80 backdrop-blur border border-gray-700 rounded-2xl p-6 space-y-4">
+                        <div>
+                            <label class="text-sm text-gray-400">Name</label>
+                            <input type="text" name="name" required class="form-input" placeholder="John Doe" />
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-400">Email</label>
+                            <input type="email" name="email" required class="form-input" placeholder="jonath@example.com" />
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-400">Message</label>
+                            <textarea name="message" rows="4" required class="form-input resize-none" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-accent font-semibold flex items-center justify-center gap-2 hover:shadow-2xl hover:shadow-primary/40 transition-all">
+                            <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <p id="form-status" class="text-sm text-center hidden"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-10 px-6 border-t border-gray-800 z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+            <div>© 2026 Quintus Jonath. Crafted with <span class="text-pink-400">♥</span> and lots of <span class="text-accent">caffeine</span>.</div>
+            <div class="flex gap-5">
+                <a href="#" class="hover:text-accent transition"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-accent transition"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-accent transition"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" class="hover:text-accent transition"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
