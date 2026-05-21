@@ -50,10 +50,8 @@ A professional, animated portfolio for a **Frontend / Backend / Full Stack Devel
 ```
 /
 ├── index.html          # All page sections in a single file
-├── css/
-│   └── style.css       # Custom styles (cursor, cards, animations, etc.)
-├── js/
-│   └── main.js         # All interactivity (loader, cursor, typing, filters, etc.)
+├── style.css       # Custom styles (cursor, cards, animations, etc.)
+├──  main.js         # All interactivity (loader, cursor, typing, filters, etc.)
 └── README.md
 ```
 
